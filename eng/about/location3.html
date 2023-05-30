@@ -1,0 +1,138 @@
+<? include "../include/head.html" ?>
+<!DOCTYPE html>
+<html lang="<?=$P_lang?>">
+	<head>
+		<?
+    $P_dp1 = '1';
+    $P_dp2 = '5';
+    include "../include/meta.html" 
+    ?>
+
+		<link rel="stylesheet" href="../../assets/css/about.css" />
+	</head>
+
+	<body class="sub-body">
+		<? include "../include/header.html" ?>
+		<? include "../include/sub-visual.html" ?>
+		<? include "../include/sub-nav.html" ?>
+
+		<main class="main sub-main" id="contents">
+			<section class="section py-lg-30 py-15">
+				<div class="container">
+					<div class="come-wrap pb-lg-25 pb-15">
+						<div class="come-list">
+							<div class="container">
+								<a href="../about/location.html" class="link">셀메드 본사</a>
+								<a href="../about/location2.html" class="link">연구소&공장</a>
+								<a href="../about/location3.html" class="link on">대전연구소</a>
+							</div>
+						</div>
+						<div class="map-wrap">
+							<div id="map-1" class="map">
+								<!-- 지도1 -->
+							</div>
+							<div class="map-box">
+								<div class="inner">
+									<div class="list">
+										<div class="tit">Address.</div>
+										<div class="desc">대전광역시 유성구 테크노4로 17 B동 516호 제이비케이랩 대전 연구소</div>
+									</div>
+									<!-- <div class="list">
+                    <div class="tit">TEL.</div>
+                    <div class="desc">1522-1194</div>
+                  </div> -->
+									<div class="list">
+										<div class="tit">FAX.</div>
+										<div class="desc">042-716-7290</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<? include "../include/footer.html" ?>
+		<? include "../include/js.html" ?>
+
+		<!-- test 서버 키값 -->
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bacef489af42f0f62ea152714393e11c&libraries=services"></script>
+
+		<!-- 로컬서버 키값 -->
+		<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b42ce64838d3ba3c9de7f36899d7134a&libraries=services"></script> -->
+		<script>
+			/* 지도 엘리먼트 (클래스명) */
+			var mapContainer = document.querySelectorAll('.map');
+
+			/* 지도 옵션 오브젝트 배열 */
+			var mapSettings = [
+				{
+					// ## 지도1 ##
+					mapOption: {
+						// 지도 옵션
+						center: new kakao.maps.LatLng(36.4324989811255, 127.39486327561369), // 지도의 중심 좌표
+						level: 3, // 지도의 확대 레벨
+					},
+					markerPosition: new kakao.maps.LatLng(36.4324989811255, 127.39486327561369), // 마커가 표시될 위치입니다
+					imageSrc: '../../assets/images/sub/logo-marker.png', // 마커이미지의 주소입니다
+					imageSize: new kakao.maps.Size(90, 100), // 마커이미지의 크기입니다
+					imageOption: { offset: new kakao.maps.Point(45, 50) }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+				},
+			];
+
+			/*
+			 * forEach 구문으로 맵 생성 ( ※ mapSettings 배열의 오브젝트 개수와 map 엘리먼트 개수가 일치하지 않을 경우 콘솔창에 에러문구를 띄웁니다.)
+			 * 매개변수 설명 : currentValue(현재엘리먼트), index(현재 인덱스), array(현재 each문이 돌고있는 배열)
+			 * */
+			/* for IE ( IE에서는 forEach 메서드가 지원되지 않기 때문에 prototype 별도 생성. ) */
+			if (window.NodeList && !NodeList.prototype.forEach) {
+				NodeList.prototype.forEach = Array.prototype.forEach;
+			}
+
+			mapContainer.forEach(function (currentValue, index, array) {
+				if (mapSettings.length !== array.length) {
+					console.error('mapSettings 배열의 Object 개수와 map 엘리먼트의 객체의 개수가 일치해야합니다.\nmapSettings 배열의 Object 개수와 map 엘리먼트 개수가 일치하는지 확인해주세요.');
+				} else {
+					// 맵 객체 생성
+					var map = new kakao.maps.Map(currentValue, mapSettings[index].mapOption);
+					// 마커 이미지 객체 생성
+					var markerImage = new kakao.maps.MarkerImage(mapSettings[index].imageSrc, mapSettings[index].imageSize, mapSettings[index].imageOption);
+					// 마커 객체 생성
+					var marker = new kakao.maps.Marker({
+						position: mapSettings[index].markerPosition, // 마커 좌표
+						image: markerImage, // 마커 이미지 객체 저장
+					});
+
+					// 마커가 지도 위에 표시되도록 설정합니다
+					marker.setMap(map);
+
+					// S: ## 좌표얻기 1 : 클릭한 위치에 마커올려보기 + 좌표얻기 ##
+					// 프로젝트 작업 후 주석!
+					kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+						var latlng = mouseEvent.latLng; // 클릭한 위도, 경도 정보를 가져옵니다
+						marker.setPosition(latlng); // 마커 위치를 클릭한 위치로 옮깁니다
+						var message = '클릭한 위치의 좌표는 \n' + latlng.getLat() + ',' + latlng.getLng() + ' \n입니다';
+						alert(message);
+						console.log(message);
+					});
+					// E: ## 좌표얻기 1 : 클릭한 위치에 마커올려보기 + 좌표얻기 ##
+				}
+			});
+
+			// S: ## 좌표얻기 2 : 검색한 주소의 좌표얻기 ##
+			// 프로젝트 작업 후 주석!
+			// var geocoder = new kakao.maps.services.Geocoder();
+			// var callback = function (result, status) {
+			//   if (status === kakao.maps.services.Status.OK) {
+			//     console.log('주소 검색결과 좌표는 \n' + result[0].road_address.y + ',' + result[0].road_address.x + '\n입니다');
+			//   } else {
+			//     console.log('주소 검색결과가 없습니다');
+			//   }
+			// };
+			// geocoder.addressSearch('경기도 성남시 둔춘대로 464', callback);
+			// E: ## 좌표얻기 2 : 검색한 주소의 좌표얻기
+		</script>
+	</body>
+</html>
+

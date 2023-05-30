@@ -1,0 +1,161 @@
+<? include "../include/head.html" ?>
+<!DOCTYPE html>
+<html lang="<?=$P_lang?>">
+	<head>
+		<?
+    $P_dp1 = '3';
+    include "../include/meta.html" 
+    ?>
+		<link rel="stylesheet" href="../assets/css/search.css" />
+	</head>
+
+	<body class="sub-body">
+		<? include "../include/header.html" ?>
+		<? include "../include/sub-visual.html" ?>
+		<? include "../include/sub-nav.html" ?>
+
+		<main class="main sub-main" id="contents">
+			<section class="section pt-20 pb-30">
+				<div class="container text-center">
+					<p class="sub-tit">가까운 셀메드 약국을 만나보세요!</p>
+				</div>
+				<div class="search-area my-10 my-lg-20">
+					<form action="">
+						<div class="search-inner">
+							<input type="search" id="info01" name="info01" class="search-input" placeholder="약국명,지역명,지하철역명을 검색해 주세요." />
+							<button type="submit" class="search-btn"><i class="xi-search"></i></button>
+						</div>
+					</form>
+				</div>
+				<div class="container">
+					<ul class="region-list mb-15">
+						<li class="region-item">서울</li>
+						<li class="region-item">경기</li>
+						<li class="region-item">인천</li>
+						<li class="region-item">세종</li>
+						<li class="region-item">강원</li>
+						<li class="region-item">충북</li>
+						<li class="region-item">충남</li>
+						<li class="region-item">대전</li>
+						<li class="region-item">전북</li>
+						<li class="region-item">전남</li>
+						<li class="region-item">광주</li>
+						<li class="region-item">경북</li>
+						<li class="region-item">경남</li>
+						<li class="region-item">대구</li>
+						<li class="region-item">부산</li>
+						<li class="region-item">울산</li>
+						<li class="region-item">제주</li>
+					</ul>
+					<p class="map-txt mb-3"><span class="search-keyword">00</span>으로 검색한 결과입니다.</p>
+					<div id="map" class="map">
+						<button type="button" class="location-btn"><i class="xi-gps"></i></button>
+					</div>
+					<!-- 로컬서버 키값 -->
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bacef489af42f0f62ea152714393e11c&libraries=services"></script>
+					<script>
+						/* 지도 엘리먼트 (클래스명) */
+						var mapContainer = document.querySelectorAll('.map');
+
+						// 매장리스트에서 항목 클릭시 해당위치로 이동하고 인포윈도우 열기
+						function setCenter(mx, my, uid) {
+							// 이동할 위도 경도 위치를 생성합니다
+							var moveLatLon = new daum.maps.LatLng(mx, my);
+							// 지도 중심을 이동 시킵니다
+							map.setCenter(moveLatLon);
+							//인포윈도우 열기
+							infowindow.open(map, marker);
+						}
+
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+							mapOption = {
+								center: new daum.maps.LatLng(37.525581360183, 127.020161146724), // 지도의 중심좌표
+								level: 4, // 지도의 확대 레벨
+							};
+						var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+						var imageSrc = '../assets/images/icon/mark.png',
+							imageSize = new daum.maps.Size(40, 53),
+							imageOption = { offset: new daum.maps.Point(20, 53) };
+						if ($(window).width() > 1024) {
+							//피씨용 마커 사이즈
+							(imageSize = new daum.maps.Size(40, 53)), (imageOption = { offset: new daum.maps.Point(20, 53) });
+						} else {
+							//모바일용 마커 사이즈
+							(imageSize = new daum.maps.Size(20, 26)), (imageOption = { offset: new daum.maps.Point(10, 26) });
+						}
+
+						// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+						var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
+							markerPosition = new daum.maps.LatLng(37.5255813601835, 127.020161146724); // 마커가 표시될 위치입니다
+
+						// 마커를 생성합니다
+						var marker = new daum.maps.Marker({
+							position: markerPosition,
+							image: markerImage, // 마커이미지 설정
+						});
+
+						var infoWindowContent = '';
+						infoWindowContent += '<div class="store-infowindow">';
+						infoWindowContent += '  <h2 class="store-infowindow__title"><img src="../assets/images/main/logo.png"/>강남신사약국</h2>';
+						infoWindowContent += '  <div class="store-infowindow__close" onclick="closeInfowindow()" title="닫기"><i class="xi-close"></i></div>';
+						infoWindowContent += '  <table class="store-infowindow__table">';
+						infoWindowContent += '    <tr>';
+						infoWindowContent += '      <th><i class="xi-maker"></i></th>';
+						infoWindowContent += '      <td>서울특별시 강남구 강남대로49길 27 강남차차약국</td>';
+						infoWindowContent += '    </tr>';
+						infoWindowContent += '    <tr>';
+						infoWindowContent += '      <th><i class="xi-call"></i></th>';
+						infoWindowContent += '      <td class="tel">02-1234-1234</td>';
+						infoWindowContent += '    </tr>';
+						infoWindowContent += '  </table>';
+						infoWindowContent += '  <h2 class="store-infowindow__subtit">운영시간</h2>';
+						infoWindowContent += '  <p class="store-info1">평일 : 10:00 ~ 20:00  주말 : 10:00 ~ 20:00</p>';
+						infoWindowContent += '  <p class="store-info2">공휴일 휴무</p>';
+						infoWindowContent += '</div>';
+
+						//인포윈도우
+						var infowindow = new kakao.maps.InfoWindow({
+							content: infoWindowContent,
+							removable: false,
+							disableAutoPan: true, //인포윈도우를 열때 자동으로 패닝
+						});
+
+						//마커 클릭시 인포윈도우 열기
+						kakao.maps.event.addListener(marker, 'click', function () {
+							//마커 클릭시
+							infowindow.close(); //다른 인포윈도우 닫고
+							infowindow.open(map, marker); //인포윈도우 열기
+						});
+
+						// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+
+						// 지도 타입 컨트롤을 지도에 표시합니다
+
+						if ($(window).width() > 1024) {
+							// 줌 컨트롤러 추가
+							var mapTypeControl = new kakao.maps.MapTypeControl();
+							var zoomControl = new daum.maps.ZoomControl();
+							map.addControl(zoomControl, daum.maps.ControlPosition.TOPRIGHT);
+							map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+							// 확대기능 제거
+							map.setZoomable(false);
+						}
+
+						// 마커가 지도 위에 표시되도록 설정합니다
+						marker.setMap(map);
+
+						// 인포윈도우를 닫기 위해 호출되는 함수입니다
+						function closeInfowindow() {
+							infowindow.close();
+						}
+					</script>
+				</div>
+			</section>
+		</main>
+
+		<? include "../include/footer.html" ?>
+		<? include "../include/js.html" ?>
+		<script></script>
+	</body>
+</html>

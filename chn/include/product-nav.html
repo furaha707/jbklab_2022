@@ -1,0 +1,55 @@
+<!-- S : sub-nav : dropdown -->
+<div class="sub-nav sub-nav--dropdown">
+	<div class="sub-nav__wrap">
+		<div class="container d-flex align-items-center">
+			<a href="../main/main.html" class="sub-nav__home">HOME</a>
+			<div class="sub-nav__item">
+				<button class="sub-nav__button" type="button">
+					<?=${nav_.$P_dp1}?>
+				</button>
+				<div class="sub-nav__drawer">
+					<ul class="sub-nav-clone--depth1">
+						<!-- depth1 clone -->
+					</ul>
+				</div>
+			</div>
+
+			<div class="sub-nav__item">
+				<button class="sub-nav__button" type="button">
+          <?=(!$depth1) ? "모든제품": $Cateinfo['catename'] ?>
+				</button>
+				<div class="sub-nav__drawer">
+					<ul class="sub-nav-clone--depth2">
+						<!-- depth2 clone -->
+					</ul>
+				</div>
+			</div>
+
+			<div class="sub-nav__item">
+				<button class="sub-nav__button 4depthbutton" type="button">카테고리</button>
+				<div class="sub-nav__drawer">
+					<ul class="category-list">
+          <?         
+          $tablename="tb_product";
+          $query2 = "SELECT cateno,catename FROM  tb_category where tablename='$tablename' and depth=2 and ucateno='$depth1'  and viewtype='Y' order by sortnum asc";
+          $result2 = $db->fetch_array( $query2 );
+          $rcount2 = count($result2) ;
+          for ( $s=0 ; $s<$rcount2 ; $s++ ) {						
+          ?>
+              <li class="category-item"><a href="?depth1=<?=$depth1?>&depth2=<?=$result2[$s][cateno]?>" class="link <?if($depth2==$result2[$s][cateno]) echo "depth4maintitle";?>">
+                <?=$result2[$s][catename]?></a></li>
+          <?}?>
+              <li class="category-item"><a href="?depth1=<?=$depth1?>" class="link <?if($depth2==$result2[$s][cateno]) echo "depth4maintitle";?>">
+                모든제품</a></li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+  $('.4depthbutton').html(($('.depth4maintitle').html()));
+</script>
+<!-- E : sub-nav : dropdown -->
+

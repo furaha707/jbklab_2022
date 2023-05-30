@@ -1,0 +1,150 @@
+<? include "../include/head.html" ?>
+<!DOCTYPE html>
+<html lang="<?=$P_lang?>">
+	<head>
+		<?
+    $P_dp1 = '4';
+    $P_dp2 = '1';
+    include "../include/meta.html" 
+    ?>
+
+		<link rel="stylesheet" href="../assets/css/inquiry.css" />
+	</head>
+
+	<body class="sub-body">
+		<? include "../include/header.html" ?>
+		<? include "../include/sub-visual.html" ?>
+		<? include "../include/sub-nav.html" ?>
+
+		<main class="main sub-main" id="contents">
+			<section class="section">
+				<div class="container pt-20 pb-30">
+					<p class="sub-txt text-center mb-5 font-weight-light text-gray-1">가맹문의를 남겨주시면 상세하게 설명드리겠습니다.</p>
+					<form action="">
+						<div class="inquiry-wrap">
+							<p class="text-right text-color-1 my-5">* 필수입력</p>
+							<table class="table-form-01 type_b border-top-0">
+								<colgroup>
+									<col width="15%" />
+									<col width="*" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>개국여부</th>
+										<td>
+											<select class="sel_for input_for w-lg-33 w-100" name="info1" title="개국여부" id="info1" onchange="showValue(this)">
+												<option value="">개국여부</option>
+												<option value="개국">개국</option>
+												<option value="비개국">비개국</option>
+												<option value="개국예정">개국예정</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>약사님 성함<span>*</span></th>
+										<td>
+											<input type="text" name="uname" id="uname" title="약사님 성함" maxlength="50" class="input_for w-lg-33 w-100" placeholder="성함을 입력해주세요." />
+										</td>
+									</tr>
+									<tr>
+										<th>약국명<span class="storemark">*</span></th>
+										<td>
+											<input type="text" name="title" id="title" title="약국명" required="" class="input_for w-lg-33 w-100" placeholder="약국명을 입력해주세요." />
+										</td>
+									</tr>
+									<tr>
+										<th>연락처 <span>*</span></th>
+										<td>
+											<input type="tel" name="utel" id="utel" onkeyup="if(isNaN(this.value)) {alert('숫자만 입력해 주세요.');this.value=''};" class="input_for w-lg-33 w-100" placeholder="숫자만 입력해주세요." />
+										</td>
+									</tr>
+									<tr>
+										<th>이메일 <span>*</span></th>
+										<td>
+											<input type="email" name="email" id="email" title="이메일" class="input_for w-lg-33 w-100" placeholder="'@'을 포함하여 입력해주세요." />
+										</td>
+									</tr>
+									<tr>
+										<th>약국주소</th>
+										<td>
+											<div class="addr-wrap">
+												<button type="button" class="addr-btn" onclick="openZipSearch()">우편번호 검색</button>
+												<input type="text" name="addr1" class="addr addr-1 w-lg-65 w-100" readonly />
+												<input type="text" name="addr2" class="addr addr-2 w-lg-35 w-100" placeholder="상세주소" />
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>문의내용 <span>*</span></th>
+										<td>
+											<textarea name="content" id="content" title="문의내용" class="area_for" placeholder="문의 내용을 입력해주세요."></textarea>
+											<ul class="clause_list mb-0">
+												<li class="d-flex align-items-center mt-2">
+													<div class="agree_box d-flex align-items-center" style="column-gap: 5px">
+														<input type="checkbox" name="yark" value="1" id="yark" title="개인정보처리방침에 동의" class="mr_05" />
+														<label for="yark">개인정보처리방침에 동의합니다.</label>
+													</div>
+													<a href="../pop/privary-popup.html" class="popup-link font-weight-semibold">[전문보기]</a>
+												</li>
+											</ul>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label for="info303" class="font-weight-medium">자동입력 방지코드 <span>*</span></label>
+										</th>
+										<td>
+											<input type="hidden" maxlength="100" name="code_org" id="code_org" value="753035" />
+											<span class="code w-lg-20 text-center">753035</span>
+											<input type="text" name="imagecode" placeholder="" id="imagecode" title="자동입력방지 코드" class="input_15" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class="board_btn_bx text_center mt_30">
+								<a href="../inquiry/inquiry-done.html" class="btn-type-01">가맹문의 접수 <i class="xi-angle-right"></i></a>
+								<!-- <input type="submit" value="가맹문의 접수 >" class="btn-type-01"> -->
+							</div>
+						</div>
+					</form>
+				</div>
+			</section>
+		</main>
+
+		<? include "../include/footer.html" ?>
+		<? include "../include/js.html" ?>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script>
+			const showValue = (target) => {
+				// 선택한 option의 value 값
+				let selecOpt = target.value;
+				let storeName = document.getElementById('title');
+
+				if (selecOpt == '비개국') {
+					document.getElementsByClassName('storemark')[0].style.display = 'none';
+					storeName.removeAttribute('required');
+				} else if (selecOpt == '개국예정') {
+					document.getElementsByClassName('storemark')[0].style.display = 'none';
+					storeName.removeAttribute('required');
+				} else if (selecOpt == '개국') {
+					document.getElementsByClassName('storemark')[0].style.display = 'inline';
+
+					storeName.setAttribute('required', '');
+				}
+			};
+
+			// 우편번호 주소 넣기
+			function openZipSearch() {
+				new daum.Postcode({
+					oncomplete: function (data) {
+						// $('[name=zip]').val(data.zonecode); // 우편번호 (5자리)
+						$('[name=addr1]').val(data.address);
+						$('[name=addr2]').val(data.buildingName);
+					},
+				}).open();
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,13 @@
+<? include "../include/head.html";
+  if($uid) {
+    $row_board = get_tb_board($uid,"tb_product");
+  }
+?>
+<div class="popup popup--sm">
+	<button type="button" class="mfp-close" onclick="$.magnificPopup.close();"><i class="xi-close-thin"></i></button>
+
+	<div class="popup__title border-bottom pb-3 mb-3">전체 성분 보기</div>
+	<div class="popup-body">
+		<div class="info"><?=nl2br($row_board[field_etc_01])?></div>
+	</div>
+</div>

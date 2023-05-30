@@ -1,0 +1,99 @@
+<ul class="nav-list nav-list--depth1">
+	<!-- 1depth item -->
+
+	<!-- S: 서브 네비게이션 테스트 -->
+	<li class="nav-list__item depth-1">
+		<a href="<?=$nav_1_href?>" class="link"><?=$nav_1?></a>
+		<ul class="nav-list nav-list--depth2">
+			<!-- 2depth item -->
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_1_1_href?>" class="link"><?=$nav_1_1?></a>
+			</li>
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_1_2_href?>" class="link"><?=$nav_1_2?></a>
+			</li>
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_1_3_href?>" class="link"><?=$nav_1_3?></a>
+			</li>
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_1_4_href?>" class="link"><?=$nav_1_4?></a>
+			</li>
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_1_5_href?>" class="link"><?=$nav_1_5?></a>
+			</li>
+		</ul>
+	</li>
+	<li class="nav-list__item depth-1">
+		<a href="<?=$nav_2_href?>" class="link"><?=$nav_2?></a>
+		<ul class="nav-list nav-list--depth2">
+
+			<!-- 2depth item -->
+      <li class="nav-list__item depth-2">
+				<a href="<?=$nav_2_1_href?>" class="link dev-on <?if(!$depth1) echo "active";?>">모든제품</a>
+			</li>
+      <?
+      $tablename = "tb_product";
+      $query2 = "SELECT cateno,catename FROM  tb_category where tablename='$tablename' and depth=1 order by sortnum asc";
+      $result2 = $db->fetch_array( $query2 );
+      $rcount2 = count($result2) ;
+      for ( $s=0 ; $s<$rcount2 ; $s++ ) {						
+      ?>  
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_2_1_href?>?depth1=<?=$result2[$s][cateno]?>" class="link dev-on <?if($depth1==$result2[$s][cateno]) echo "active";?>"><?=$result2[$s][catename]?></a>
+			</li>
+      <!-- 
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_2_1_href?>" class="link dev-on"><?=$nav_2_1?></a>
+			</li>
+      -->
+
+      <?}?>
+
+			
+		</ul>
+	</li>
+	<li class="nav-list__item depth-1">
+		<a href="<?=$nav_3_href?>" class="link"><?=$nav_3?></a>
+	</li>
+	<li class="nav-list__item depth-1">
+		<a href="<?=$nav_4_href?>" class="link"><?=$nav_4?></a>
+	</li>
+	<li class="nav-list__item depth-1">
+		<a href="<?=$nav_5_href?>" class="link"><?=$nav_5?></a>
+		<ul class="nav-list nav-list--depth2">
+			<!-- 2depth item -->
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_5_1_href?>" class="link"><?=$nav_5_1?></a>
+			</li>
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_5_2_href?>" class="link"><?=$nav_5_2?></a>
+			</li>
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_5_3_href?>" class="link"><?=$nav_5_3?></a>
+			</li>
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_5_4_href?>" class="link"><?=$nav_5_4?></a>
+			</li>
+      <!-- <li class="nav-list__item depth-2">
+				<a href="<?=$nav_policy_href?>" class="link"><?=$nav_policy?></a>
+			</li> -->
+		</ul>
+	</li>
+	<!-- E: 서브 네비게이션 테스트 -->
+	<li class="nav-list__item depth-1 d-none">
+		<a href="<?=$nav_policy_href?>" class="link"><?=$nav_policy?></a>
+		<ul class="nav-list nav-list--depth2">
+			<!-- 2depth item -->
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_policy_1_href?>" class="link"><?=$nav_policy_1?></a>
+			</li>
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_policy_2_href?>" class="link"><?=$nav_policy_2?></a>
+			</li>
+			<li class="nav-list__item depth-2">
+				<a href="<?=$nav_policy_3_href?>" class="link"><?=$nav_policy_3?></a>
+			</li>
+		</ul>
+	</li>
+</ul>
+

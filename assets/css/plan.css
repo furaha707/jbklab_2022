@@ -1,0 +1,192 @@
+/* Made by Masstige */
+.plan-body .sub-visual__title {
+  display: none !important;
+}
+
+.plan-title {
+  font-size: 3rem;
+  letter-spacing: -0.025em;
+  font-weight: bold;
+  color: #006a5a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.plan-title img {
+  margin-right: 5px;
+}
+@media all and (max-width: 1024px) {
+  .plan-title {
+    font-size: 2.375rem;
+    flex-direction: column;
+  }
+  .plan-title img {
+    width: 140px;
+    margin-right: 0px;
+    margin-bottom: 5px;
+  }
+}
+
+.plan-text {
+  font-size: 1.375rem;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  color: #888;
+  padding-top: 10px;
+}
+
+.plan-wrapper {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4rem;
+  margin-bottom: 4rem;
+}
+@media all and (max-width: 1024px) {
+  .plan-wrapper {
+    flex-direction: column;
+  }
+}
+.plan-wrapper .plan-tit-bx {
+  width: 20%;
+  margin-top: 24px;
+}
+@media all and (max-width: 1024px) {
+  .plan-wrapper .plan-tit-bx {
+    margin-top: 0px;
+    width: 100%;
+  }
+}
+.plan-wrapper .plan-tit-bx .tit {
+  font-size: 2.125rem;
+  letter-spacing: -0.025em;
+  font-weight: bold;
+  color: #222;
+}
+@media all and (max-width: 1200px) {
+  .plan-wrapper .plan-tit-bx .tit {
+    font-size: 1.875rem;
+  }
+}
+.plan-wrapper .plan-tit-bx .sub-tit {
+  font-size: 1.125rem;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  color: #666666;
+}
+@media all and (max-width: 1200px) {
+  .plan-wrapper .plan-tit-bx .sub-tit {
+    font-size: 1.125rem;
+  }
+}
+.plan-wrapper .plan-tit-bx .link {
+  margin-top: 4rem;
+  display: inline-block;
+  font-size: 0.9375rem;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: #111;
+}
+.plan-wrapper .plan-tit-bx .link i {
+  font-weight: bold;
+}
+@media all and (max-width: 1024px) {
+  .plan-wrapper .plan-tit-bx .link {
+    margin-top: 2rem;
+  }
+}
+.plan-wrapper .plan-slider {
+  width: 80%;
+}
+@media all and (max-width: 1024px) {
+  .plan-wrapper .plan-slider {
+    width: 100%;
+  }
+}
+.plan-wrapper .plan-slider .swiper-control {
+  display: flex;
+  justify-content: flex-end;
+}
+.plan-wrapper .plan-slider .swiper-control .now {
+  color: #006a5a;
+  font-weight: bold;
+}
+.plan-wrapper .plan-slider .swiper-control .swiper-button i {
+  font-weight: bold;
+}
+.plan-wrapper .plan-slider .swiper-slide:hover .img_box {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.plan-wrapper .plan-slider .swiper-slide:hover .txt_box .tit {
+  color: #006a5a;
+}
+.plan-wrapper .plan-slider .img_box {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s;
+}
+.plan-wrapper .plan-slider .img_box::after {
+  content: "";
+  display: block;
+  padding-bottom: 71.6417910448%;
+}
+.plan-wrapper .plan-slider .img_box > img,
+.plan-wrapper .plan-slider .img_box iframe {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  min-width: 1000%;
+  min-height: 1000%;
+  max-width: none;
+  max-height: none;
+  transform: translate(-50%, -50%) scale(0.1);
+}
+.plan-wrapper .plan-slider .txt_box {
+  text-align: center;
+  margin-top: 15px;
+}
+.plan-wrapper .plan-slider .txt_box .tit {
+  font-size: 1.125rem;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: #222;
+}
+.plan-wrapper .plan-slider .txt_box .des {
+  font-size: 1.125rem;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: #666;
+}
+
+.img_board_list .img_box {
+  transition: all 0.3s;
+}
+.img_board_list a:hover {
+  transform: translateY(0px);
+}
+.img_board_list .txt_box .tit {
+  font-size: 1.125rem;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: #222;
+  height: auto;
+}
+.img_board_list .txt_box .des {
+  font-size: 1rem;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  height: 3em;
+}
+/*# sourceMappingURL=plan.css.map */

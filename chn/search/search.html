@@ -1,0 +1,460 @@
+<? include "../include/head.html" ?>
+<!DOCTYPE html>
+<html lang="<?=$P_lang?>">
+	<head>
+		<?
+    $P_dp1 = '3';
+    include "../include/meta.html";
+    
+    //$test_sql = " and (uid='1428' or uid='531' or uid='1426' or uid='526' or uid='1427')";
+
+    $tablename="tb_jijum";
+    include $_SERVER[DOCUMENT_ROOT]."/INC/tableset.php";
+    if($lcode) {
+      $city=$lcode;
+    }
+    else
+    {
+      $lcode = $city;
+    }
+
+       
+    if (Trim($_SESSION['x_data'])=="") $_SESSION['x_data']="37.5527658366683"; 
+   	if (Trim($_SESSION['y_data'])=="") $_SESSION['y_data']="126.923975017598";    
+    
+   
+    $get_page  = escape_string($_GET['page']);
+    $mcode = escape_string($_REQUEST['mcode']);
+    $keyword = escape_string($_REQUEST['keyword']);
+    $code = escape_string($_REQUEST['code']);
+
+    if(!empty($keyword)){
+      $where_add .= " AND (title like '%".$keyword."%' or uaddr1 like '%".$keyword."%' or uaddr2 like '%".$keyword."%' or info1 like '%".$keyword."%')";
+    }
+  
+
+    if(!$x_data and !$lcode and !$keyword) $x_data = "37.5527658366683";
+    if(!$y_data and !$lcode and !$keyword) $y_data = "126.923975017598";
+
+
+    //--- 1순위 출력 디폴트 좌표
+    $row_board = get_tb_other1("1 $where_add $test_sql",$tablename,"reg_date"); 
+
+    if($row_board[uid]) {
+      $_SESSION['x_data']=$row_board[y_data]; 
+     	$_SESSION['y_data']=$row_board[x_data]; 
+    } else {
+      $_SESSION['x_data']="37.5527658366683"; 
+     	$_SESSION['y_data']="126.923975017598";    
+    }
+
+    ?>
+
+
+
+		<link rel="stylesheet" href="../assets/css/search.css" />
+	</head>
+
+	<body class="sub-body">
+		<? include "../include/header.html" ?>
+		<? include "../include/sub-visual.html" ?>
+		<? include "../include/sub-nav.html" ?>
+
+		<main class="main sub-main" id="contents">
+			<section class="section pt-20 pb-30 wowrap">
+				<div class="container text-center wow fadeInUp">
+					<p class="sub-tit">가까운 셀메드 약국을 만나보세요!</p>
+				</div>
+				<div class="search-area my-10 my-lg-20 wow fadeInUp">
+
+          <form method="get" action="?" id="searchForm" name="signform">
+            <input type="hidden" name="city_val" value="" />
+            <input type="hidden" name="county_name" value="" />
+
+						<div class="search-inner">
+							<input type="search"  name="keyword"value="<?=$_GET[keyword]?>" class="search-input" placeholder="약국명,지역명을 검색해 주세요." /><!-- ,지하철역명 -->
+							<button type="submit" class="search-btn"><i class="xi-search"></i></button>
+						</div>
+					</form>
+				</div>
+				<div class="container">
+					<ul class="region-list mb-15">
+          <?
+          $query2 = "SELECT sido FROM  tb_area group by sido";
+          $result2 = $db->fetch_array( $query2 );
+          $rcount2 = count($result2);
+          for ( $s=0 ; $s<$rcount2 ; $s++ ) {
+          ?>
+						<li class="region-item <?if($result2[$s][sido]=="$lcode") echo "on";?>"><a href="?lcode=<?=$result2[$s][sido]?>"><?=$result2[$s][sido]?></a></li>
+          <?}?>
+					</ul>
+
+
+
+					<div id="map" class="map">
+						<button type="button" class="location-btn"><i class="xi-gps"></i></button>
+					</div>
+
+
+        <?php
+
+          $tablename="tb_jijum";
+
+          $pagePerBlock = "10";
+					empty($get_plist) ? $pagesize = "1000000" :  $pagesize = $get_plist; /// 페이지출력수
+					empty($get_page) ? $page = 1 : $page = $get_page;  /// 페이지번호
+
+					$pageurl = $_SERVER['PHP_SELF'];
+					$perpage = ($page-1) * $pagesize;
+					$search = "lcode=$lcode&mcode=$mcode&keyword=$keyword&code=$code";
+
+					///검색정보
+					$where_add ="";
+
+
+					if(!empty($keyword)){
+						$where_add .= " AND (title like '%".$keyword."%' or uaddr1 like '%".$keyword."%'  or uaddr2 like '%".$keyword."%' or info1 like '%".$keyword."%')";
+					}
+
+					if(!empty($lcode) and !empty($mcode)){
+						$where_add .= " AND (lcode like '%".$lcode."%' and lcode like '%".$mcode."%')";
+					}else if(!empty($lcode)){
+						$where_add .= " AND (lcode like '%".$lcode."%')";
+					}
+
+
+          if($_SESSION['x_data']) $x_data = $_SESSION['x_data']; else $x_data = "37.5527658366683";
+          if($_SESSION['y_data']) $y_data = $_SESSION['y_data']; else $y_data = "126.923975017598";
+
+          if($lcode=="강원") {
+            $x_data = "37.6887075061024";
+            $y_data = "127.880407335292";
+          }
+          if($lcode=="경기") {
+            $x_data = "37.409632231243";
+            $y_data = "127.258570413994";
+          }
+          if($lcode=="경남") {
+            $x_data = "35.4990789119076";
+            $y_data = "128.744004286386";
+          }
+          if($lcode=="경북") {
+            $x_data = "36.5610309153153";
+            $y_data = "128.749937975206";
+          }
+          if($lcode=="부산") {
+            $x_data = "129.070525174559";
+            $y_data = "129.070525174559";
+          }
+          if($lcode=="울산") {
+            $x_data = "35.5353742534636";
+            $y_data = "129.321840893564";
+          }
+          if($lcode=="전남") {
+            $x_data = "34.9509669068972";
+            $y_data = "126.960988627451";
+          }
+
+          if($lcode=="전북") {
+            $x_data = "35.7141495307638";
+            $y_data = "126.992688418462";
+          }
+          if($lcode=="제주") {
+            $x_data = "33.4922384009257";
+            $y_data = "126.543176897454";
+          }
+          if($lcode=="충남") {
+            $x_data = "36.4511570785258";
+            $y_data = "126.80331908979";
+          }
+
+
+          $query = "select *,6371*acos(cos(radians(".$x_data."))*cos(radians(y_data))*cos(radians(x_data)-radians(".$y_data."))+sin(radians(".$x_data."))*sin(radians(y_data))) as distance from $tablename where viewtype='Y' and (x_data!='' and  y_data!='') $where_add $test_sql order by 6371*acos(cos(radians(".$x_data."))*cos(radians(y_data))*cos(radians(x_data)-radians(".$y_data."))+sin(radians(".$x_data."))*sin(radians(y_data))) DESC";
+
+					$result_cnt = $db->fetch_array( $query );
+					$total_num = count($result_cnt) ;
+
+					if(!empty($total_num)){
+						//연결 URL, 총번호, 한페이지갯수, 최대페이지번호, 현재페이지, 서치
+						$pageNavi = $common->paging_new( $pageurl, $total_num, $pagesize, $pagePerBlock, $page, $search);
+						$pageNaviHTML = ''.$pageNavi.''; ///페이징
+
+						//목록 출력 적용
+						$limit = "limit $perpage, $pagesize";
+						$numbers = $total_num - $perpage;
+
+            // 전체 쿼리에 제한 걸기
+            $query = $query ." ".$limit;
+            //echo "$query ///<br>";
+
+						$result = $db->fetch_array( $query );
+						$rcount = count($result) ;
+					}
+					$totalNumOfPage = ceil($total_num/$pagesize);
+					
+					?>
+
+					<p class="map-txt mb-3"><span class="search-keyword"><?=number_format($rcount)?>건 <?//echo "$x_data / $y_data";?> <?if($keyword) {?><?=$keyword?></span>으로 검색한 결과입니다.<?}?>  </p>
+
+				<?
+            $postion_txt="";
+
+						for ( $i=0 ; $i<$rcount ; $i++ ) {
+              $list = $result[$i];
+              $link_page = "$_SERVER[PHP_SELF]?bmain=view&uid=".$list[uid]."&mode=".$list[mode]."&language=".$get_language;
+
+
+              $today = date("Y-m-d");
+              $my_fileadd_name = $list[fileadd_name];
+              if($my_fileadd_name) {
+                $view_img = "$HOME_PATH/$tablefile/$my_fileadd_name";
+              } else {
+                $view_img = "../assets/images/main/logo.png";
+              }
+              
+              //-- 디폴트 매장 좌표 
+              $x_data = $result[$i]["y_data"];
+              $y_data = $result[$i]["x_data"];
+
+              $title = $result[$i]["title"];
+              $uid = $result[$i]["uid"];
+              $info1 = $result[$i]["info1"];
+
+              $info1 = $result[$i]["info1"];
+              $info2 = $result[$i]["info2"];
+              $info3 = $result[$i]["info3"];
+              $info4 = $result[$i]["info4"];
+              $info5 = $result[$i]["info5"];
+
+              $uaddr1 = $result[$i]["uaddr1"];
+              $uaddr2 = $result[$i]["uaddr2"];
+
+              $distance = ($result[$i]["distance"]*1 < 1 )?"[".(int)($result[$i]["distance"]*1000)."m]":"[".sprintf("%.2f",$result[$i]["distance"])."km]";
+
+              $postion_txt .= ($i>0)?",":"";
+              
+
+              if($info3 OR $info4 OR $info5) $add_info = "<h2 class='store-infowindow__subtit'>운영시간</h2><p class='store-info1'>평일 : $info3  주말 : $info4</p><p class='store-info2'>$info5 </p>";
+
+              $infowindowcontent="<div class='store-infowindow'><h2 class='store-infowindow__title'><img src='$view_img'/>$title</h2><div class='store-infowindow__close' onclick='closeInfowindow()' title='닫기'></div><table class='store-infowindow__table'><tr><th><i class='xi-maker'></i></th><td>$uaddr1 $uaddr2 </td></tr><tr><th><i class='xi-call'></i></th><td class='tel'><a href='tel:$info2'>$info2</a></td></tr></table>".$add_info."</div>";
+
+              $postion_txt .= "{\"infoWindowContent\":\"".$infowindowcontent."\",\"lat\":".$result[$i]['y_data'].",\"lng\":".$result[$i]['x_data']."}";  
+
+				?>      
+        <?}?>
+
+
+				</div>
+			</section>
+		</main>
+
+		<? include "../include/footer.html" ?>
+		<? include "../include/js.html" ?>
+
+
+
+					<!-- 로컬서버 키값 -->
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bacef489af42f0f62ea152714393e11c&libraries=clusterer"></script>
+
+          <script type="text/javascript" language="JavaScript">
+          <!--	
+            //var x_data = "<?=$_SESSION['x_data'];?>";
+            //var y_data = "<?=$_SESSION['y_data'];?>";
+
+            var x_data = "<?=$x_data?>";
+            var y_data = "<?=$y_data?>";
+              
+            if (navigator.geolocation) {  // HTML5의 geolocation으로 사용할 수 있는지 확인합니다. 스마트폰 위치사용여부가 아닙니다.		
+              navigator.geolocation.getCurrentPosition(function(position) {
+                //--- 위치정보 출력
+                x_data2 = position.coords.latitude;
+                y_data2 = position.coords.longitude;
+                alert(x_data2);
+                if(x_data!=x_data2 || y_data!=y_data2) {																						
+                  $.ajax({
+                    url : 'navi_cookie.php',
+                    type : "post",
+                    async: false,
+                    data : {x_data:x_data2,y_data:y_data2},
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    success:function(data){
+                      location.href="/findstore/findstore.html";			
+                    }
+                  });					 
+                   // 이동할 위도 경도 위치를 생성합니다
+                   var moveLatLon = new daum.maps.LatLng(x_data2,y_data2);
+                  // 지도 중심을 이동 시킵니다
+                   map.setCenter(moveLatLon);
+                }
+              }, function(error) {												
+                 // 이동할 위도 경도 위치를 생성합니다
+                   var moveLatLon = new daum.maps.LatLng(x_data,y_data);
+                  // 지도 중심을 이동 시킵니다
+                   map.setCenter(moveLatLon);					 				
+              }, {
+                enableHighAccuracy: false,
+                maximumAge: 0,
+                timeout: Infinity
+              });							
+            } else {							 
+               var moveLatLon = new daum.maps.LatLng(x_data,y_data);
+              // 지도 중심을 이동 시킵니다
+               map.setCenter(moveLatLon);		
+            }
+          //-->
+
+          </script>		
+          <script>	
+
+            var markers = [];
+            var infowindows=[];
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                mapOption = {
+                  center: new kakao.maps.LatLng(x_data,y_data), // 지도의 중심좌표
+                  level: 10 // 지도의 확대 레벨
+              };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다			
+              
+
+              // 마커 클러스터러를 생성합니다
+              var clusterer = new kakao.maps.MarkerClusterer({
+                  map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+                  averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+                  minLevel: 10 // 클러스터 할 최소 지도 레벨
+              });
+
+                      
+            var imageSrc = '../assets/images/icon/mark.png',
+              imageSize = new daum.maps.Size(38, 52),
+              imageOption = {offset: new daum.maps.Point(23,60)};
+              if ($(window).width() <= 1024) {
+                //모바일용 마커 사이즈
+                imageSize = new daum.maps.Size(36, 48),
+                imageOption = {offset: new daum.maps.Point(18, 48)};
+              }		
+
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);	
+
+            var data={"positions": [<?=$postion_txt;?>]}; 
+              // 데이터를 가져오기 위해 jQuery를 사용합니다
+              // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+              
+            // 데이터에서 좌표 값을 가지고 마커를 표시합니다
+            // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+            var markers = $(data.positions).map(function(i, position) {
+            
+              var mark = new daum.maps.Marker({
+                map: map,
+                image : markerImage, // 마커 이미지
+                position : new daum.maps.LatLng(position.lat, position.lng)
+              });
+              
+              //position.infoWindowContent=position.infoWindowContent.replace("#distance",getDistance(x_data,y_data,position.lat,position.lng));
+              
+              // 인포윈도우를 생성합니다
+              var infowindow = new kakao.maps.InfoWindow({
+                content : position.infoWindowContent,
+                removable : true
+              });	
+
+              infowindows.push(infowindow);		
+              //kakao.maps.event.addListener(mark, 'mouseover', makeOverListener(map, mark, infowindow));
+              //kakao.maps.event.addListener(mark, 'mouseout', makeOutListener(infowindow));
+              //kakao.maps.event.addListener(mark, 'click', makeOverListener(map, mark, infowindow));
+              
+              kakao.maps.event.addListener(mark,'click', function() {
+
+              // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+              for (var j = 0; j < markers.length; j++) {
+                infowindows[j].setMap(null);
+              }
+              
+              infowindows[i].open(map,markers[i]);
+
+              
+              $('.store-search__list').find('.wrap').removeClass('active');
+              $('#wrap'+i).addClass('active');
+              
+              //$('#wrap'+i).addClass('active').parent().siblings('.item').children('.wrap').removeClass('active');      
+              
+              $('.store-search__list__wrap.scroll-content').animate({
+                'scrollTop':$('.wrap.active').position().top},0);
+              });
+              return mark;
+              
+            });							
+            
+              // 클러스터러에 마커들을 추가합니다
+              clusterer.addMarkers(markers);
+
+            // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+            function makeOverListener(map, marker, infowindow) {
+              infowindow.close();
+              return function() {						
+                infowindow.open(map, marker);
+              };
+            }
+
+            function makeOutListener(infowindow) {
+                  return function() {
+               infowindow.close();
+                  };
+              }
+            
+            //----- 지도 특정 위치로 이동
+            function setCenter(mx,my,i) {
+              // 이동할 위도 경도 위치를 생성합니다
+              var moveLatLon = new daum.maps.LatLng(mx,my);
+              // 지도 중심을 이동 시킵니다
+              map.setCenter(moveLatLon);	
+              for (var j = 0; j < markers.length; j++) {	
+                infowindows[j].setMap(null);
+              }
+              infowindows[i].open(map,markers[i]);
+              $('.store-search__list').find('.wrap').removeClass('active');
+              $('#wrap'+i).addClass('active');
+            }
+            
+            if ($(window).width() > 1024){
+              // 줌 컨트롤러 추가  
+							var mapTypeControl = new kakao.maps.MapTypeControl();
+							var zoomControl = new daum.maps.ZoomControl();
+							map.addControl(zoomControl, daum.maps.ControlPosition.TOPRIGHT);
+							map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+							// 확대기능 제거
+							map.setZoomable(true);
+            }
+
+            // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+            function zoomIn() {
+                  map.setLevel(map.getLevel() - 1);
+              }
+            // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+              function zoomOut() {
+                  map.setLevel(map.getLevel() + 1);
+
+              }
+            
+            function getDistance(lat1, lon1, lat2, lon2) {
+              if ((lat1 == lat2) && (lon1 == lon2))	return 0;	
+              var radLat1 = Math.PI * lat1 / 180;
+              var radLat2 = Math.PI * lat2 / 180;
+              var theta = lon1 - lon2;
+              var radTheta = Math.PI * theta / 180;
+              var dist = Math.sin(radLat1) * Math.sin(radLat2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.cos(radTheta);
+              if (dist > 1) dist = 1;	
+              dist = Math.acos(dist);
+              dist = dist * 180 / Math.PI;
+              dist = dist * 60 * 1.1515 * 1.609344 * 1000;
+              if (dist < 100) dist = Math.round(dist / 10) * 10;
+              else dist = Math.round(dist / 100) * 100;	
+              
+              if (dist < 1000) dist=dist+"m";
+              else dist=(dist/1000).toFixed(2)+"Km";	
+              return dist;
+            }
+            </script>
+        
+	</body>
+</html>

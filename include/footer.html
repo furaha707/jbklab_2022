@@ -1,0 +1,111 @@
+<footer id="footer" class="footer">
+	<div class="footer-wrap py-6 py-lg-3 border-bottom">
+		<div class="container">
+			<div class="footer__policy">
+				<ul class="d-flex align-items-center mx-n3 mx-lg-n8">
+					<li class="px-3 px-lg-8"><a href="../policy/privacy.html" class="policy-link">개인정보처리방침</a></li>
+					<li class="px-3 px-lg-8"><a href="../policy/email-security.html" class="policy-link">이메일무단수집거부</a></li>
+				</ul>
+				<div class="mt-5 mt-lg-0 d-flex justify-content-between">
+					<ul class="sns-wrap">
+						<li class="sns-item">
+							<a href="" class="link">
+								<img src="../assets/images/icon/i-kakao.png" alt="카카오" title="카카오톡 바로가기" class="ico" />
+								<img src="../assets/images/icon/i-kakao-hover.png" alt="카카오" title="카카오톡 바로가기" class="ico-hover" />
+							</a>
+						</li>
+						<li class="sns-item">
+							<a href="" class="link">
+								<img src="../assets/images/icon/i-blog.png" alt="블로그" title="블로그 바로가기" class="ico" />
+								<img src="../assets/images/icon/i-blog-hover.png" alt="블로그" title="블로그 바로가기" class="ico-hover" />
+							</a>
+						</li>
+						<li class="sns-item">
+							<a href="" class="link">
+								<img src="../assets/images/icon/i-insta.png" alt="인스타" title="인스타 바로가기" class="ico" />
+								<img src="../assets/images/icon/i-insta-hover.png" alt="인스타" title="인스타 바로가기" class="ico-hover" />
+							</a>
+						</li>
+						<li class="sns-item">
+							<a href="" class="link">
+								<img src="../assets/images/icon/i-youtube.png" alt="유투브" title="유투브 바로가기" class="ico" />
+								<img src="../assets/images/icon/i-youtube-hover.png" alt="유투브" title="유투브 바로가기" class="ico-hover" />
+							</a>
+						</li>
+						<li class="sns-item">
+							<a href="" class="link">
+								<img src="../assets/images/icon/i-facebook.png" alt="페이스북" title="페이스북 바로가기" class="ico" />
+								<img src="../assets/images/icon/i-facebook-hover.png" alt="페이스북" title="페이스북 바로가기" class="ico-hover" />
+							</a>
+						</li>
+					</ul>
+					<select name="sites" id="sites">
+						<option value="">Family site</option>
+						<option value="">1</option>
+						<option value="">2</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-wrap">
+		<div class="container">
+			<div class="footer__btm">
+				<div class="footer__address">
+					<div class="footer__logo">
+						<img src="../assets/images/main/logo.png" alt="<?=$SS[sitename]?>" />
+					</div>
+					<div class="footer__info">
+						<p class="tit mt-3"><?=$P_company_name?></p>
+						<div class="footer__txt mt-3">
+							<p class="txt">
+								<span>대표자명 :<?=$P_ceo?></span>
+								<span>주소 :<?=$P_addr1?></span>
+								<span>전화번호 :<?=$P_tel1?></span>
+								<span>팩스번호 :<?=$P_fax1?></span>
+								<span>통신판매업신고번호 :<?=$P_sales_no?></span>
+								<span>사업자등록번호 :<?=$P_business_no?></span>
+							</p>
+						</div>
+
+						<p class="footer-copyright">
+							<?=$SS[sitecopyright]?>
+							<a href="https://www.masstige.biz" target="_blank" title="대한민국 최고의 주문제작 홈페이지 제작업체 - 매스티지" class="created-masstige">Created By <span class="masstige">Masstige.</span></a>
+						</p>
+					</div>
+				</div>
+				<div class="footer__tel">
+					<p class="tit">
+						<span class="d-block"> <img src="../assets/images/icon/i-phone.png" alt="고객센터" /> 고객센터</span>
+						<a href="tel:<?=$P_tel1?>" class="tel"><?=$P_tel1?></a>
+					</p>
+					<p class="txt pt-0 pt-lg-3">상담시간 AM 09:00 - PM 06:00 / 점심시간 PM 12:00 - 1:00</p>
+					<p class="txt">토요일, 일요일, 공휴일 휴무</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<div class="quick-menu mt-1">
+	<div class="inner">
+		<a href="javascript:void(0)" class="menu-item sns" target="_blank" onclick="javascript:alert('Coming Soon.'); return false">
+			<img src="../assets/images/icon/quick1.png" alt="카카오" />
+		</a>
+		<a href="javascript:void(0)" class="menu-item sns" target="_blank" onclick="javascript:alert('Coming Soon.'); return false">
+			<img src="../assets/images/icon/quick2.png" alt="블로그" />
+		</a>
+		<a href="javascript:void(0)" class="menu-item sns" target="_blank" onclick="javascript:alert('Coming Soon.'); return false">
+			<img src="../assets/images/icon/quick3.png" alt="인스타" />
+		</a>
+		<a href="javascript:void(0)" class="menu-item sns" target="_blank" onclick="javascript:alert('Coming Soon.'); return false">
+			<img src="../assets/images/icon/quick4.png" alt="모바일" />
+		</a>
+		<button type="button" class="menu-item total-menu">
+			<img src="../assets/images/icon/quick6.png" alt="닫기" />
+		</button>
+		<a href="javascript:void(0)" class="menu-item top-btn" onclick="$('html, body').animate({scrollTop: $('body').offset().top}, 500);">
+			<img src="../assets/images/icon/quick5.png" alt="top" />
+		</a>
+	</div>
+</div>

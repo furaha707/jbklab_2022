@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+//공통사용 텍스트 스타일 정의
+@for $title from 20 through 60 {
+	$size: $title;
+
+	.common-title {
+		&--#{$size} {
+			font-size: rem($size);
+			line-height: 1.3;
+		}
+	}
+}
+
+@for $text from 10 through 19 {
+	$size: $text;
+
+	.common-text {
+		&--#{$size} {
+			font-size: rem($size);
+		}
+	}
+}
+
+.main-tit {
+	font-size: rem(44);
+	letter-spacing: letterSpacing(-25);
+	font-weight: 500;
+	.num {
+		font-family: $font-family-sub;
+	}
+	@include mdq-max(lg) {
+		font-size: rem(26);
+	}
+}
+
+.main-des {
+	font-size: rem(24);
+	letter-spacing: letterSpacing(-25);
+	font-weight: 400;
+	@include mdq-max(lg) {
+		font-size: rem(20);
+	}
+}
+
+.main-txt {
+	.tit {
+		font-size: rem(48);
+		letter-spacing: letterSpacing(-25);
+		font-weight: bold;
+		color: #222;
+		@include mdq-max(lg) {
+			font-size: rem(30);
+		}
+	}
+	.txt {
+		font-size: rem(22);
+		letter-spacing: letterSpacing(-25);
+		font-weight: 400;
+		color: #888;
+		@include mdq-max(lg) {
+			font-size: rem(16);
+		}
+	}
+}
+
+.sub-tit {
+	font-size: rem(48);
+	letter-spacing: letterSpacing(-25);
+	font-weight: bold;
+	color: #222;
+	@include mdq-max(lg) {
+		font-size: rem(30);
+	}
+}
+
+.sub-txt {
+	font-size: rem(22);
+	letter-spacing: letterSpacing(-25);
+	font-weight: 500;
+	color: #888;
+	@include mdq-max(lg) {
+		font-size: rem(16);
+	}
+}

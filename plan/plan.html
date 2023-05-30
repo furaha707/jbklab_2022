@@ -1,0 +1,266 @@
+<? include "../include/head.html" ?>
+<!DOCTYPE html>
+<html lang="<?=$P_lang?>">
+	<head>
+		<?
+    $P_dp1 = '6';
+    $P_dp2 = '1';
+    include "../include/meta.html" 
+    ?>
+		<link rel="stylesheet" href="../assets/css/plan.css" />
+	</head>
+
+	<body class="sub-body">
+		<? include "../include/header.html" ?>
+		<? include "../include/sub-visual.html" ?>
+		<? include "../include/sub-nav.html" ?>
+
+		<main class="main sub-main" id="contents">
+			<section class="section">
+				<div class="container pb-30">
+					<p class="sub-tit text-center pt-20 pb-10">전체 플랜</p>
+					<div class="tab tab--product mb-20">
+						<div class="tab-header">
+							<div class="tab-item">
+								<a class="link on" data-target="#content01">시니어 플랜</a>
+							</div>
+							<div class="tab-item">
+								<a class="link" data-target="#content02">직장인 플랜</a>
+							</div>
+							<div class="tab-item">
+								<a class="link" data-target="#content03">라이트 플랜</a>
+							</div>
+							<div class="tab-item">
+								<a class="link" data-target="#content04">뷰티 플랜</a>
+							</div>
+							<div class="tab-item">
+								<a class="link" data-target="#content05">뷰티 플랜</a>
+							</div>
+						</div>
+					</div>
+					<div class="plan-wrapper" id="content01">
+						<div class="plan-tit-bx">
+							<div class="inner">
+								<p class="tit">시니어 플랜</p>
+								<p class="sub-tit">설명이 노출되는 영역</p>
+							</div>
+							<a href="./plan-list.html" class="link"><i class="xi-plus"></i> 더 보기</a>
+						</div>
+
+						<div class="plan-slider swiper-container">
+							<div class="swiper-control mb-3">
+								<button type="button" class="swiper-button swiper-button--prev">
+									<i class="xi-angle-left"></i>
+								</button>
+								<div class="page mx-2">
+									<span class="now">2</span>
+									<span class="mx-0">/</span>
+									<span class="total">2</span>
+								</div>
+								<button type="button" class="swiper-button swiper-button--next">
+									<i class="xi-angle-right"></i>
+								</button>
+							</div>
+							<div class="swiper-wrapper"></div>
+						</div>
+					</div>
+					<div class="plan-wrapper" id="content02">
+						<div class="plan-tit-bx">
+							<div class="inner">
+								<p class="tit">시니어 플랜</p>
+								<p class="sub-tit">설명이 노출되는 영역</p>
+							</div>
+							<a href="./plan-list.html" class="link"><i class="xi-plus"></i> 더 보기</a>
+						</div>
+						<div class="plan-slider swiper-container">
+							<div class="swiper-control mb-3">
+								<button type="button" class="swiper-button swiper-button--prev">
+									<i class="xi-angle-left"></i>
+								</button>
+								<div class="page mx-2">
+									<span class="now">2</span>
+									<span class="mx-0">/</span>
+									<span class="total">2</span>
+								</div>
+								<button type="button" class="swiper-button swiper-button--next">
+									<i class="xi-angle-right"></i>
+								</button>
+							</div>
+							<div class="swiper-wrapper">
+								<a href="" class="swiper-slide">
+									<!-- 이미지 권장사이즈 670*480 -->
+									<div class="img_box">
+										<img src="../images/board/default_thumb.jpg" alt="product image" />
+									</div>
+									<div class="txt_box">
+										<p class="tit">제목입니다</p>
+										<p class="des">제품 간단 설명</p>
+									</div>
+								</a>
+								<a href="" class="swiper-slide">
+									<!-- 이미지 권장사이즈 670*480 -->
+									<div class="img_box">
+										<img src="../images/board/default_thumb.jpg" alt="product image" />
+									</div>
+									<div class="txt_box">
+										<p class="tit">제목입니다</p>
+										<p class="des">제품 간단 설명</p>
+									</div>
+								</a>
+								<a href="" class="swiper-slide">
+									<!-- 이미지 권장사이즈 670*480 -->
+									<div class="img_box">
+										<img src="../images/board/default_thumb.jpg" alt="product image" />
+									</div>
+									<div class="txt_box">
+										<p class="tit">제목입니다</p>
+										<p class="des">제품 간단 설명</p>
+									</div>
+								</a>
+								<a href="" class="swiper-slide">
+									<!-- 이미지 권장사이즈 670*480 -->
+									<div class="img_box">
+										<img src="../images/board/default_thumb.jpg" alt="product image" />
+									</div>
+									<div class="txt_box">
+										<p class="tit">제목입니다</p>
+										<p class="des">제품 간단 설명</p>
+									</div>
+								</a>
+								<a href="" class="swiper-slide">
+									<!-- 이미지 권장사이즈 670*480 -->
+									<div class="img_box">
+										<img src="../images/board/default_thumb.jpg" alt="product image" />
+									</div>
+									<div class="txt_box">
+										<p class="tit">제목입니다</p>
+										<p class="des">제품 간단 설명</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<? include "../include/footer.html" ?>
+		<? include "../include/js.html" ?>
+		<script>
+			$(document).ready(function () {
+				var planAddSlider = [];
+
+				console.log(planAddSlider);
+
+				$('.plan-slider').each(function (index) {
+					var $this = $(this);
+					$this.addClass('plan-slider' + index);
+
+					planAddSlider[index] = new Swiper('.plan-slider' + index, {
+						loop: false,
+						slidesPerView: 2,
+						spaceBetween: 10,
+						speed: 500,
+						autoplay: {
+							delay: 5000,
+							disableOnInteraction: false,
+						},
+						autoHeight: true,
+						navigation: {
+							nextEl: $('.plan-slider' + index).children('.swiper-button--next'),
+							prevEl: $('.plan-slider' + index).children('.swiper-button--prev'),
+						},
+						breakpoints: {
+							1024: {
+								slidesPerView: 3,
+								spaceBetween: 30,
+							},
+							1200: {
+								slidesPerView: 4,
+								spaceBetween: 30,
+							},
+						},
+					});
+
+					var thumbslide = $('.plan-slider' + index).find('.swiper-slide').length;
+
+					var activeSlide = planAddSlider[index].realIndex + 1;
+					$('.plan-slider' + index)
+						.find('.now')
+						.text(activeSlide);
+
+					if (thumbslide <= 0) {
+						$('.plan-slider' + index)
+							.find('.now')
+							.text('0');
+					}
+
+					if (window.innerWidth > 1200) {
+						$('.plan-slider' + index)
+							.find('.total')
+							.text(thumbslide - 3);
+
+						if (thumbslide >= 1 && thumbslide <= 4) {
+							$('.plan-slider' + index)
+								.find('.total')
+								.text('1');
+						} else if (thumbslide <= 0) {
+							$('.plan-slider' + index)
+								.find('.total')
+								.text('0');
+						}
+					} else if (window.innerWidth <= 1200) {
+						$('.plan-slider' + index)
+							.find('.total')
+							.text(thumbslide - 2);
+
+						if (thumbslide >= 1 && thumbslide <= 3) {
+							$('.plan-slider' + index)
+								.find('.total')
+								.text('1');
+						} else if (thumbslide <= 0) {
+							$('.plan-slider' + index)
+								.find('.total')
+								.text('0');
+						}
+					}
+
+					if (window.innerWidth <= 1024) {
+						$('.plan-slider' + index)
+							.find('.total')
+							.text(thumbslide - 1);
+						if (thumbslide >= 1 && thumbslide <= 2) {
+							$('.plan-slider' + index)
+								.find('.total')
+								.text('1');
+						} else if (thumbslide <= 0) {
+							$('.plan-slider' + index)
+								.find('.total')
+								.text('0');
+						}
+					}
+
+					console.log(thumbslide);
+
+					planAddSlider[index].on('slideChange', function () {
+						var activeSlide = planAddSlider[index].realIndex + 1;
+						$('.plan-slider' + index)
+							.find('.now')
+							.text(activeSlide);
+					});
+				});
+
+				const headerHeight = $('.header').height() + 10;
+
+				$('.tab-item .link').on('click', function () {
+					const target = $(this).attr('data-target');
+					const scrollPosition = $(target).offset().top - headerHeight;
+
+					$('.tab-item .link').removeClass('on');
+					$(this).addClass('on');
+					$('html, body').stop().animate({ scrollTop: scrollPosition }, 500);
+				});
+			});
+		</script>
+	</body>
+</html>

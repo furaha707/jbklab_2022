@@ -1,0 +1,741 @@
+<? include "../include/head.html" ?>
+<!DOCTYPE html>
+<html lang="<?=$P_lang?>">
+	<head>
+		<?
+    $P_dp0 = 'main';
+    include "../include/meta.html" 
+    ?>
+		<link rel="stylesheet" href="../assets/css/main.min.css" />
+	</head>
+	<body class="main-body">
+		<? include "../include/header.html" ?>
+		<div class="main-intro">
+			<div class="intro-txt">
+				<img src="../assets/images/main/loading-logo.png" alt="로고" />
+			</div>
+		</div>
+		<main class="main" id="contents">
+			<div class="fullpage">
+				<!-- S : main-visual -->
+
+				<section class="section main-visual">
+					<h1 class="sr-only">메인비주얼 영역</h1>
+					<div class="main-swiper swiper-container">
+						<div class="swiper-wrapper">
+							<!-- 
+              pc: 1920x940
+              m: 1440x1984 
+            -->
+							<div class="swiper-slide">
+								<div class="test"></div>
+								<style>
+									.test {
+										position: absolute;
+										width: 100%;
+										background-color: transparent;
+										height: 100%;
+										left: 0;
+										right: 0;
+										top: 0;
+										bottom: 0;
+										z-index: 100;
+									}
+								</style>
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe src="https://www.youtube.com/embed/AnnsuyrlSfE?autoplay=1&mute=1&autohide=1&rel=0?controls=0" poster="../assets/images/main/main-visual.jpg" allow="autoplay"></iframe>
+								</div>
+							</div>
+
+							<!--
+							<div class="swiper-slide item">
+								<a href="#" class="link">
+									<div class="img-bx">
+										<img class="d-none d-md-block" src="../assets/images/main/main-visual.jpg" alt="메인비주얼" />
+										<img class="d-block d-md-none" src="../assets/images/main/main-visual-m.jpg" alt="메인비주얼" />
+									</div>
+									<div class="txt-bx">
+										<div class="container">
+											<h2 class="title">
+												깐깐한 양희은이 선택한<br />
+												셀메드 천연 노유파
+											</h2>
+											<p class="text">NOEUFA SUNFLOWERSEED OIL</p>
+											<button type="button" class="detail-link">자세히 보기 <i class="xi-angle-right"></i></button>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="swiper-slide item">
+								<a href="#" class="link">
+									<div class="img-bx">
+										<img class="d-none d-md-block" src="../assets/images/main/main-visual2.jpg" alt="메인비주얼" />
+										<img class="d-block d-md-none" src="../assets/images/main/main-visual2.jpg" alt="메인비주얼" />
+									</div>
+									<div class="txt-bx">
+										<div class="container">
+											<h2 class="title">
+												깐깐한 양희은이 선택한<br />
+												셀메드 천연 노유파
+											</h2>
+											<p class="text">NOEUFA SUNFLOWERSEED OIL</p>
+											<button type="button" class="detail-link">자세히 보기 <i class="xi-angle-right"></i></button>
+										</div>
+									</div>
+								</a>
+							</div>
+				-->
+							<!-- <div class="swiper-slide item">
+								<a href="#" class="link">
+									<div class="img-bx">
+										<video class="video-slide" src="../assets/images/main/visual_video_2.mov" autoplay playsinline muted loop></video>
+									</div>
+								</a>
+							</div> -->
+						</div>
+						<div class="swiper-control">
+							<div class="container">
+								<!-- S : Swiper Pagination -->
+								<div class="swiper-pagination"></div>
+								<!-- E : Swiper Pagination -->
+								<button type="button" class="swiper-button swiper-button--prev">
+									<i class="xi-angle-left"></i>
+								</button>
+								<div class="swiper-play on">
+									<i class="xi-play"></i>
+									<i class="xi-pause"></i>
+								</div>
+								<button type="button" class="swiper-button swiper-button--next">
+									<i class="xi-angle-right"></i>
+								</button>
+								<!-- E : Swiper Navigation -->
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- E : main-visual -->
+
+				<script>
+					setTimeout(function () {
+						$('.main-intro').addClass('active');
+						$('.main-visual').css('left', '0');
+						$('.main-visual').animate(
+							{
+								left: '0',
+								opacity: '1',
+							},
+							700
+						);
+					}, 3000);
+				</script>
+
+				<script>
+					// $(document).ready(function () {
+					// 	var urlWords = document.referrer.split('/');
+					// 	// console.log(urlWords[3] == 'jbklab');
+					// 	console.log(document.referrer);
+					// });
+
+					if (window.history.length === 1) {
+						$('.main-intro').addClass('active');
+					}
+
+					// S : 원래 스크립트
+					if (document.referrer == '') {
+						var referurl = '';
+					} else {
+						var referurl = document.referrer.match(/http[s]*:\/\/([a-zA-Z0-9\-\.]*)/)[1];
+					}
+					var nowurl = document.location.href.match(/http[s]*:\/\/([a-zA-Z0-9\-\.]*)/)[1];
+					if (referurl != nowurl) {
+						$('.main-intro').addClass('active');
+						setTimeout(function () {
+							// $('.main-intro').css('left','-100%');
+							$('.main-intro').animate(
+								{
+									left: '-100%',
+								},
+								700
+							);
+							$('.main-visual').animate(
+								{
+									left: '0',
+									opacity: '1',
+								},
+								700
+							);
+						}, 3000);
+					} else {
+						setTimeout(function () {
+							$('.main-intro').removeClass('active');
+							// $('.main-intro').fadeOut(300);
+							// $('.main-intro').css('left','-100%');
+							$('.main-intro').animate(
+								{
+									left: '-100%',
+								},
+								700
+							);
+							$('.main-visual').css('left', '0');
+							$('.main-visual').animate(
+								{
+									left: '0',
+									opacity: '1',
+								},
+								700
+							);
+						}, 3000);
+					}
+
+					if ($('.main-visual .swiper-wrapper').find('.embed-responsive').length > 0) {
+						$('.main-visual .swiper-control').hide();
+					}
+					// E : 원래 스크립트
+
+					// if (document.referrer == '') {
+					// 	var referurl = '';
+					// } else {
+					// 	var referurl = document.referrer.match(/http[s]*:\/\/([a-zA-Z0-9\-\.]*)/)[1];
+					// }
+					// var nowurl = document.location.href.match(/http[s]*:\/\/([a-zA-Z0-9\-\.]*)/)[1];
+					// if (referurl != nowurl) {
+					// 	$('.main-intro').show();
+					// 	setTimeout(function () {
+					// 		$('.main-intro').fadeOut(300);
+					// 		$('.main-visual').animate(
+					// 			{
+					// 				left: '0',
+					// 				opacity: '1',
+					// 			},
+					// 			700
+					// 		);
+					// 	}, 3000);
+					// } else {
+					// 	setTimeout(function () {
+					// 		$('.main-intro').fadeOut(300);
+					// 		$('.main-visual').animate(
+					// 			{
+					// 				left: '0',
+					// 				opacity: '1',
+					// 			},
+					// 			700
+					// 		);
+					// 	}, 3000);
+					// }
+				</script>
+
+				<!-- S : section -->
+				<section class="section section-product">
+					<div class="container">
+						<div class="main-area mb-10">
+							<div class="main-txt">
+								<p class="tit">제품소개</p>
+								<p class="txt ml-5 mb-1">건강한 삶을 위한 선물, 셀메드의 제품을 소개합니다</p>
+							</div>
+							<a href="../product/list.html" class="more">MORE <i class="xi-angle-right"></i></a>
+						</div>
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<div class="img-bx">
+										<!-- 이미지 권장사이즈 1080*800 -->
+										<img src="../assets/images/main/product_thumb.png" alt="제품" />
+									</div>
+									<div class="txt-bx">
+										<p class="category">일반의약품</p>
+										<p class="txt">비바이뮨</p>
+										<div class="des mt-10">
+											<p class="des-tit">상세설명</p>
+											<p class="des-txt mt-3">비바이뮨 캡슐 제형 경질캡슐, PTP 내용량 21g(350mg*30캡슐*2박스) 섭취방법 1일 1회, 1회 1캡슐(1캡슐당 350mg)을 물과 함께 섭취</p>
+										</div>
+										<a href="../product/view.html" class="product-detail mt-20">자세히 보기 <i class="xi-angle-right"></i></a>
+									</div>
+								</div>
+								<div class="swiper-slide">
+									<div class="img-bx">
+										<!-- 이미지 권장사이즈 1080*800 -->
+										<img src="../assets/images/main/product_thumb.png" alt="제품" />
+									</div>
+									<div class="txt-bx">
+										<p class="category">일반의약품</p>
+										<p class="txt">비바이뮨</p>
+										<div class="des mt-10">
+											<p class="des-tit">상세설명</p>
+											<p class="des-txt mt-3">비바이뮨 캡슐 제형 경질캡슐, PTP 내용량 21g(350mg*30캡슐*2박스) 섭취방법 1일 1회, 1회 1캡슐(1캡슐당 350mg)을 물과 함께 섭취</p>
+										</div>
+										<a href="../product/view.html" class="product-detail mt-20">자세히 보기 <i class="xi-angle-right"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="product__pagination swiper-pagination__fraction page">
+								<span class="swiper-pagination-current now">2</span>
+								<span class="seperate mx-0 mx-sm-1">/</span>
+								<span class="swiper-pagination-total total">2</span>
+							</div>
+							<div class="swiper-control">
+								<div class="container h-100">
+									<button type="button" class="swiper-button swiper-button--prev">
+										<img src="../assets/images/icon/big-arrow-left.png" alt="prev" />
+									</button>
+									<button type="button" class="swiper-button swiper-button--next">
+										<img src="../assets/images/icon/big-arrow-right.png" alt="next" />
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- E : section -->
+
+				<!-- S : section -->
+				<section class="section section-promotion py-10">
+					<div class="container">
+						<div class="main-area mt-15 mb-20">
+							<div class="main-txt text-center">
+								<p class="tit">홍보자료</p>
+								<p class="txt">셀메드의 최근 소식과 다양한 홍보자료를 소개합니다</p>
+							</div>
+							<a href="../product/product.html" class="more">MORE <i class="xi-angle-right"></i></a>
+						</div>
+					</div>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<a href="javascript:void(0)" class="hover-effect hover-effect--outline hover-effect--outline--3">
+									<!-- 이미지 권장사이즈 1800*1000 -->
+									<div class="hover-effect__wrap img-bx">
+										<img src="../assets/images/main/news-thumb.jpg" alt="제품" />
+										<span class="outline outline--t"></span>
+										<span class="outline outline--r"></span>
+										<span class="outline outline--b"></span>
+										<span class="outline outline--l"></span>
+									</div>
+									<div class="txt-bx">천연비타민 셀메드 이선균CF 메이킹필름</div>
+									<div class="arrow-link"><img src="../assets/images/icon/hover-arrow.png" alt="right" /></div>
+								</a>
+							</div>
+							<div class="swiper-slide">
+								<a href="javascript:void(0)" class="hover-effect hover-effect--outline hover-effect--outline--3">
+									<!-- 이미지 권장사이즈 1800*1000 -->
+									<div class="hover-effect__wrap img-bx">
+										<img src="../assets/images/main/news-thumb.jpg" alt="제품" />
+										<span class="outline outline--t"></span>
+										<span class="outline outline--r"></span>
+										<span class="outline outline--b"></span>
+										<span class="outline outline--l"></span>
+									</div>
+									<div class="txt-bx">천연비타민 셀메드 이선균CF 메이킹필름</div>
+									<div class="arrow-link"><img src="../assets/images/icon/hover-arrow.png" alt="right" /></div>
+								</a>
+							</div>
+						</div>
+						<div class="swiper-pagination"></div>
+						<div class="swiper-control">
+							<div class="container">
+								<button type="button" class="swiper-button swiper-button--prev">
+									<img src="../assets/images/icon/big-arrow-left.png" alt="prev" />
+								</button>
+								<button type="button" class="swiper-button swiper-button--next">
+									<img src="../assets/images/icon/big-arrow-right.png" alt="next" />
+								</button>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- E : section -->
+
+				<!-- S : section -->
+				<section class="section section-search">
+					<div class="search-bg">
+						<img src="../assets/images/main/search-bg.jpg" alt="약국지점" class="pc" />
+						<img src="../assets/images/main/search-bg-m.jpg" alt="약국지점" class="m" />
+					</div>
+					<div class="container">
+						<div class="search-wrap">
+							<div class="search-txt">
+								<div class="search-item">
+									<p class="store-txt">전국 제휴약국 <span class="count" data-value="2000">2000</span>점</p>
+									<div class="position-relative">
+										<div class="img-bx">
+											<img src="../assets/images/main/search-item.jpg" alt="셀메드 정회원 약국" />
+										</div>
+										<div class="txt-bx">
+											<p class="des">약사영양처방 활성형 식물영양소 전문 브랜드</p>
+											<p class="tit mb-10">셀메드 정회원 약국</p>
+											<a href="../search/search.html" class="link">
+												<span>가장 가까운 약국 찾아보기</span>
+												<div class="arrow-effect-left">
+													<div id="cta">
+														<span class="arrow first next"></span>
+														<span class="arrow second next"></span>
+													</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- E : section -->
+
+				<!-- S : section -->
+				<section class="section section-news fp-auto-height">
+					<div class="container py-40">
+						<div class="main-txt text-center mb-10 mb-lg-25">
+							<p class="tit">셀메드소식</p>
+							<p class="txt pt-3">셀메드의 다양한 소식을 전해드립니다</p>
+						</div>
+
+						<div class="tab tab--box" data-tab="true" data-tab-order="0" data-tab-active="on" data-tab-index="0" data-css="true">
+							<div class="tab-header" data-tab-header="">
+								<div class="tab-item">
+									<a class="link" data-tab-item="">공지사항</a>
+								</div>
+								<div class="tab-item">
+									<a class="link" data-tab-item="">보도자료</a>
+								</div>
+							</div>
+							<div class="tab-body" data-tab-body="">
+								<div class="tab-content" data-tab-content="">
+									<ul class="news-list wowrap">
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+									</ul>
+								</div>
+								<div class="tab-content" data-tab-content="">
+									<ul class="news-list wowrap">
+										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+											<div class="inner">
+												<div class="date">2022-07-01</div>
+												<div class="cont">
+													<p class="tit">신제품 모랑모랑부스터 캡슐 출시 안내 <span class="notice-badge">공지사항</span></p>
+													<p class="txt">안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다. 안녕하세요 셀메드입니다. 남녀 탈모전용 천연 영양소 모랑모랑부스터 캡슐이 출시되었습니다.</p>
+												</div>
+												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
+											</div>
+										</a>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- E : section -->
+
+				<!-- S : section -->
+				<section class="section section-inquiry">
+					<div class="container text-white wowrap">
+						<div class="inquiry-tit wow fadeInUp">
+							<p class="main-des">약사가 직접 처방하는 활성형 식물영양소 브랜드</p>
+							<p class="main-tit">셀메드를 경험해보세요!</p>
+						</div>
+						<div class="inquiry-tel wow fadeInUp">
+							<p class="main-des">
+								<span>뉴트라슈티컬을 경험해보고 싶다면? 지금 바로 연락주세요!</span>
+							</p>
+							<div class="main-tit d-flex align-items-center">
+								가맹문의
+								<p class="ml-5 d-flex align-items-center"><img src="../assets/images/icon/call-bg.png" alt="아이콘" /> <span class="num"> 1522-1194</span></p>
+							</div>
+						</div>
+						<a href="" class="main-detail mt-15" onclick="javascript:alert('서비스 준비중입니다'); return false">자세히 보기 <i class="xi-angle-right"></i></a>
+					</div>
+				</section>
+				<!-- E : section -->
+
+				<!-- S : section -->
+				<section class="section fp-auto-height">
+					<? include "../include/footer.html" ?>
+				</section>
+				<!-- E : section -->
+			</div>
+		</main>
+
+		<? include "../include/js.html" ?>
+		<script>
+			var ytIframeSrc = $('.yt-iframe').attr('src');
+			var mainFullpage = new fullpage('.fullpage', {
+				licenseKey: 'F67168A3-4AB64A38-A211B922-2DB1C3AC',
+				// menu: '.nav-list',
+				navigation: true,
+				navigationPosition: 'left',
+				navigationTooltips: ['Main', 'Products', 'PR', 'Pharmacy', 'News', 'Membership'],
+				showActiveTooltip: true,
+				fixedElements: '#header',
+				fixedElements: '.quick-menu',
+				scrollOverflow: '.section-news',
+				// paddingTop: '100px',
+				responsiveWidth: 1200,
+				scrollingSpeed: 300,
+				easing: 'easeInOutCubic',
+				easingcss3: 'ease',
+				afterLoad: function (origin, destination, direction) {
+					$('.section').each(function () {
+						if ($(this).hasClass('active')) {
+							$(this).find('.wow.fadeInUp').addClass('animated').css({
+								visibility: 'visible',
+								'animation-name': 'fadeInUp',
+							});
+							$(this).find('.wow.fadeInLeft').addClass('animated').css({
+								visibility: 'visible',
+								'animation-name': 'fadeInLeft',
+							});
+							$(this).find('.wow.fadeInRight').addClass('animated').css({
+								visibility: 'visible',
+								'animation-name': 'fadeInRight',
+							});
+							$(this).find('.wow.fadeIn').addClass('animated').css({
+								visibility: 'visible',
+								'animation-name': 'fadeIn',
+							});
+							$(this).find('.wow.fadeIn').addClass('animated').css({
+								visibility: 'visible',
+								'animation-name': 'fadeIn',
+							});
+							$(this).find('.wow.bounceIn').addClass('animated').css({
+								visibility: 'visible',
+								'animation-name': 'bounceIn',
+							});
+						}
+					});
+				},
+				onLeave: function (origin, destination, direction) {
+					var leavingSection = this;
+
+					if (origin.index == 0 && destination.index == 1 && direction == 'down') {
+						$('header').removeClass('fix');
+						$('header').removeClass('first');
+					} else if (origin.index == 2 && destination.index == 3 && direction == 'down') {
+						var counterUp = window.counterUp.default;
+						var els = document.querySelectorAll('.count');
+						for (var i = 0; i < els.length; i++) {
+							var el = els[i];
+
+							counterUp(el, {
+								duration: 1500,
+								delay: 20,
+							});
+						}
+						$('header').addClass('fix');
+						$('header').addClass('first');
+					} else if (origin.index == 3 && destination.index == 4 && direction == 'down') {
+						$('header').removeClass('fix');
+					} else if (origin.index == 4 && destination.index == 5 && direction == 'down') {
+						$('header').addClass('fix');
+					} else if (origin.index == 5 && destination.index == 6 && direction == 'down') {
+						$('header').removeClass('fix');
+					} else if (origin.index == 1 && destination.index == 0 && direction == 'up') {
+						$('header').addClass('fix');
+						$('.yt-iframe').attr('src', ytIframeSrc);
+					} else if (origin.index == 3 && destination.index == 2 && direction == 'up') {
+						$('header').removeClass('fix');
+					} else if (origin.index == 4 && destination.index == 3 && direction == 'up') {
+						$('header').addClass('fix');
+					} else if (origin.index == 5 && destination.index == 4 && direction == 'up') {
+						$('header').removeClass('fix');
+					} else if (origin.index == 6 && destination.index == 5 && direction == 'up') {
+						$('header').addClass('fix');
+					}
+				},
+			});
+
+			if ($(window).outerWidth() < 1200) {
+				mainFullpage.setLockAnchors(true);
+			}
+
+			var visualSwiper = new Swiper('.main-visual .swiper-container', {
+				loop: true,
+				effect: 'fade',
+				fadeEffect: {
+					crossFade: true,
+				},
+				autoplay: {
+					delay: 5000,
+					disableOnInteraction: false,
+				},
+				autoHeight: true,
+				pagination: {
+					el: '.main-visual .swiper-pagination',
+					type: 'bullets',
+					clickable: true,
+				},
+				navigation: {
+					nextEl: '.main-visual .swiper-button--next',
+					prevEl: '.main-visual .swiper-button--prev',
+				},
+			});
+
+			$('.main-visual .swiper-play').on('click', function () {
+				if ($(this).hasClass('on')) {
+					$(this).removeClass('on');
+					visualSwiper.autoplay.stop();
+				} else {
+					$(this).addClass('on');
+					visualSwiper.autoplay.start();
+				}
+			});
+
+			var productSwiper = new Swiper('.section-product .swiper-container', {
+				loop: true,
+				effect: 'fade',
+				fadeEffect: {
+					crossFade: true,
+				},
+				autoplay: {
+					delay: 5000,
+					disableOnInteraction: false,
+				},
+				autoHeight: true,
+				navigation: {
+					nextEl: '.section-product .swiper-button--next',
+					prevEl: '.section-product .swiper-button--prev',
+				},
+			});
+
+			var slide = $('.section-product .swiper-slide').not('.section-product .swiper-slide-duplicate').length;
+
+			$('.page .now').text('01');
+			$('.page .total').text('0' + slide);
+
+			productSwiper.on('slideChange', function () {
+				var activeSlide = productSwiper.realIndex + 1;
+
+				$('.page .now').text('0' + activeSlide);
+			});
+
+			var promotionSwiper = new Swiper('.section-promotion .swiper-container', {
+				loop: true,
+				effect: 'slide',
+				// fadeEffect: {
+				// 	crossFade: true,
+				// },
+				slidesPerView: 1,
+				centeredSlides: false,
+				spaceBetween: 30,
+				autoplay: {
+					delay: 5000,
+					disableOnInteraction: false,
+				},
+				pagination: {
+					el: '.section-promotion .swiper-pagination',
+					type: 'bullets',
+					clickable: true,
+				},
+				autoHeight: true,
+				navigation: {
+					nextEl: '.section-promotion .swiper-button--next',
+					prevEl: '.section-promotion .swiper-button--prev',
+				},
+				breakpoints: {
+					1024: {
+						centeredSlides: true,
+						slidesPerView: 2,
+						spaceBetween: 50,
+					},
+					1400: {
+						centeredSlides: true,
+						slidesPerView: 2,
+						spaceBetween: 90,
+					},
+				},
+			});
+
+			$(function () {
+				$('.top-btn').click(function () {
+					fullpage_api.moveTo(1);
+				});
+			});
+		</script>
+	</body>
+</html>

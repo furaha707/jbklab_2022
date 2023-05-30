@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+@import 'functions';
+@import 'variables';
+
+// Mixins
+@import 'mixins';
+
+// 가맹문의
+.inquiry-wrap{
+  input , select{
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    height: auto;
+    font-size: rem(18);
+    padding: 12PX 0;
+  }
+  select{
+    color: $gray-6;
+  }
+  .table-form-01 tr{
+    @include mdq-max(sm) {
+      border-bottom: 0;
+    }
+  }
+  .table-form-01 tr th{
+    font-size: rem(18);
+  }
+  .table-form-01 tr td, .table-form-01 tr th {
+    border: 0;
+  }
+  .table-form-01 .area_for{
+    border: 0;
+    font-size: rem(18);
+    border-bottom: 1px solid #ddd;
+  }
+  .table-form-01 th span{
+    color: $color-1;
+  }
+  .btn-type-01{
+    padding: 12px 20px;
+    border-radius: 35px;
+  }
+}
+
+.addr-wrap{
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  @include mdq-max(lg) {
+    flex-wrap: wrap;
+  }
+  .addr-btn{
+    width: 161px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    font-size: rem(16);
+    background: $gray-1;
+    border-radius: 35px;
+  }
+}
+
+
+// 가맹문의 완료
+.inquiry-done{
+  text-align: center;
+  .title{
+    font-size: rem(32);
+    font-weight: 500;
+    @include mdq-max(lg) {
+      font-size: rem(28);
+    }
+  }
+  .text{
+    font-size: rem(22);
+    font-weight: 300;
+    color: $gray-6;
+  }
+  .go-main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 230px;
+    height: 46px;
+    font-size: rem(17);
+    color: $white;
+    column-gap: em(10);
+    background-color: $color-1;
+    border-radius: 35px;
+    transition: 0.3s;
+    &:hover{
+      background-color: darken($color-1, 10%);
+    }
+  }
+}

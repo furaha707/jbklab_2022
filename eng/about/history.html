@@ -1,0 +1,61 @@
+<? include "../include/head.html" ?>
+<!DOCTYPE html>
+<html lang="<?=$P_lang?>">
+	<head>
+		<?
+    $P_dp1 = '1';
+    $P_dp2 = '3';
+    include "../include/meta.html";
+
+    ?>
+
+		<link rel="stylesheet" href="../../assets/css/about.css" />
+	</head>
+
+	<body class="sub-body">
+		<? include "../include/header.html" ?>
+		<? include "../include/sub-visual.html" ?>
+		<? include "../include/sub-nav.html" ?>
+
+		<main class="main sub-main" id="contents">
+			<section class="section pb-20">
+				<div class="container pt-lg-30 pb-30 py-15">
+					<div class="history-wrap">
+						<div class="logo overflow-hidden">
+							<img class="wow fadeInLeft" data-wow-delay="0.3s" src="../../assets/images/sub/history-logo.png" alt="셀메드 로고" />
+						</div>
+						<div class="history-list">
+							<?php
+
+          $tablename = "tb_history";
+          if(!$bmain) $bmain = "list";
+
+          $query = "SELECT * FROM  $tablename  WHERE 1 and viewtype!='N' group by year ORDER BY year DESC, month desc";
+          $result = $db->fetch_array( $query ); $rcount = count($result); for ( $i=0,$c=1 ; $i<$rcount ; $i++,$c++) { $nowyear = $result[$i][year]; $nextyear = $result[$c][year]; if(($i%2)=="0") $css_alig="left"; else $css_alig="right"; ?>
+							<div class="box wow fadeInUp">
+								<div class="year"><?=$result[$i][year]?></div>
+								<div class="content">
+									<?
+                $query1 = "SELECT * FROM  $tablename  WHERE 1 and viewtype!='N' and year='".$result[$i][year]."' ORDER BY month desc";
+                $result1 = $db->fetch_array( $query1 ); $rcount1 = count($result1) ; for ($ii=0; $ii<$rcount1; $ii++) { if($result1[$ii][uid]) { $row_board = get_tb_board($result1[$ii][uid],"tb_history"); } $JsonData = json_decode(urldecode($row_board['JsonData']),true); $row_board['JsonData'] = ""; $jsoncontent = json_encode(array_merge((array)$row_board,(array)$JsonData),JSON_UNESCAPED_UNICODE); foreach($row_board as $key => $val){ if(in_array($key,$DEFAULT_FILE_FIELD)){ $val = urldecode($val); $val = str_replace("\n","\\n",$val); $val = str_replace("\r","\\r",$val); $row_board[$key] = json_decode($val, true); } } ?>
+									<div class="list">
+										<div class="month"><?=$row_board[month]?></div>
+										<div class="txt"><?=$row_board[content]?></div>
+									</div>
+									<?}?>
+								</div>
+							</div>
+							<?
+            $lastyear = $result[$i][year];
+            $numbers--; //paging에 따른 번호
+            }?></div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<? include "../include/footer.html" ?>
+		<? include "../include/js.html" ?>
+	</body>
+</html>
+
