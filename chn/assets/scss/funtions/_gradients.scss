@@ -1,5 +1,0 @@
-@charset "UTF-8";
-
-@function gradient($deg, $start, $end) {
-  @return linear-gradient($deg, $start 0%, $end 100%);
-}
