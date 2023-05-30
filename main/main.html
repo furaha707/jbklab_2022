@@ -43,7 +43,7 @@
 									}
 								</style>
 								<div class="embed-responsive embed-responsive-16by9">
-									<iframe src="https://www.youtube.com/embed/AnnsuyrlSfE?autoplay=1&mute=1&autohide=1&rel=0?controls=0" poster="../assets/images/main/main-visual.jpg" allow="autoplay"></iframe>
+									<iframe src="https://www.youtube.com/embed/t0W2l7c1eyo?autoplay=1&mute=1&autohide=1&rel=0?controls=0&loop=1&playlist=t0W2l7c1eyo" poster="../assets/images/main/main-visual.jpg" allow="autoplay" data-autoplay></iframe>
 								</div>
 							</div>
 
@@ -131,30 +131,19 @@
 				</script>
 
 				<script>
-					// $(document).ready(function () {
-					// 	var urlWords = document.referrer.split('/');
-					// 	// console.log(urlWords[3] == 'jbklab');
-					// 	console.log(document.referrer);
-					// });
+					$(window).load(function () {
+						window.localStorage.setItem('loadPage', 'Y');
+					});
 
-					if (window.history.length === 1) {
-						$('.main-intro').addClass('active');
-					}
+					let storageValue = localStorage.getItem('loadPage');
 
-					// S : 원래 스크립트
-					if (document.referrer == '') {
-						var referurl = '';
-					} else {
-						var referurl = document.referrer.match(/http[s]*:\/\/([a-zA-Z0-9\-\.]*)/)[1];
-					}
-					var nowurl = document.location.href.match(/http[s]*:\/\/([a-zA-Z0-9\-\.]*)/)[1];
-					if (referurl != nowurl) {
+					if (storageValue == 'Y') {
 						$('.main-intro').addClass('active');
 						setTimeout(function () {
 							// $('.main-intro').css('left','-100%');
 							$('.main-intro').animate(
 								{
-									left: '-100%',
+									left: '-100vw',
 								},
 								700
 							);
@@ -173,7 +162,7 @@
 							// $('.main-intro').css('left','-100%');
 							$('.main-intro').animate(
 								{
-									left: '-100%',
+									left: '-100vw',
 								},
 								700
 							);
@@ -191,38 +180,6 @@
 					if ($('.main-visual .swiper-wrapper').find('.embed-responsive').length > 0) {
 						$('.main-visual .swiper-control').hide();
 					}
-					// E : 원래 스크립트
-
-					// if (document.referrer == '') {
-					// 	var referurl = '';
-					// } else {
-					// 	var referurl = document.referrer.match(/http[s]*:\/\/([a-zA-Z0-9\-\.]*)/)[1];
-					// }
-					// var nowurl = document.location.href.match(/http[s]*:\/\/([a-zA-Z0-9\-\.]*)/)[1];
-					// if (referurl != nowurl) {
-					// 	$('.main-intro').show();
-					// 	setTimeout(function () {
-					// 		$('.main-intro').fadeOut(300);
-					// 		$('.main-visual').animate(
-					// 			{
-					// 				left: '0',
-					// 				opacity: '1',
-					// 			},
-					// 			700
-					// 		);
-					// 	}, 3000);
-					// } else {
-					// 	setTimeout(function () {
-					// 		$('.main-intro').fadeOut(300);
-					// 		$('.main-visual').animate(
-					// 			{
-					// 				left: '0',
-					// 				opacity: '1',
-					// 			},
-					// 			700
-					// 		);
-					// 	}, 3000);
-					// }
 				</script>
 
 				<!-- S : section -->
@@ -289,20 +246,20 @@
 				<!-- E : section -->
 
 				<!-- S : section -->
-				<section class="section section-promotion py-10">
+				<section class="section section-promotion">
 					<div class="container">
-						<div class="main-area mt-15 mb-20">
+						<div class="main-area mt-5 mt-lg-15 mb-15 mb-lg-20">
 							<div class="main-txt text-center">
 								<p class="tit">홍보자료</p>
 								<p class="txt">셀메드의 최근 소식과 다양한 홍보자료를 소개합니다</p>
 							</div>
-							<a href="../product/product.html" class="more">MORE <i class="xi-angle-right"></i></a>
+							<a href="../community/media.html" class="more">MORE <i class="xi-angle-right"></i></a>
 						</div>
 					</div>
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								<a href="javascript:void(0)" class="hover-effect hover-effect--outline hover-effect--outline--3">
+								<a href="../community/promotion-view.html" class="hover-effect hover-effect--outline hover-effect--outline--3">
 									<!-- 이미지 권장사이즈 1800*1000 -->
 									<div class="hover-effect__wrap img-bx">
 										<img src="../assets/images/main/news-thumb.jpg" alt="제품" />
@@ -316,7 +273,7 @@
 								</a>
 							</div>
 							<div class="swiper-slide">
-								<a href="javascript:void(0)" class="hover-effect hover-effect--outline hover-effect--outline--3">
+								<a href="../community/promotion-view.html" class="hover-effect hover-effect--outline hover-effect--outline--3">
 									<!-- 이미지 권장사이즈 1800*1000 -->
 									<div class="hover-effect__wrap img-bx">
 										<img src="../assets/images/main/news-thumb.jpg" alt="제품" />
@@ -334,10 +291,10 @@
 						<div class="swiper-control">
 							<div class="container">
 								<button type="button" class="swiper-button swiper-button--prev">
-									<img src="../assets/images/icon/big-arrow-left.png" alt="prev" />
+									<i class="xi-angle-left"></i>
 								</button>
 								<button type="button" class="swiper-button swiper-button--next">
-									<img src="../assets/images/icon/big-arrow-right.png" alt="next" />
+									<i class="xi-angle-right"></i>
 								</button>
 							</div>
 						</div>
@@ -455,7 +412,7 @@
 								</div>
 								<div class="tab-content" data-tab-content="">
 									<ul class="news-list wowrap">
-										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
 											<div class="inner">
 												<div class="date">2022-07-01</div>
 												<div class="cont">
@@ -465,7 +422,7 @@
 												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
 											</div>
 										</a>
-										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
 											<div class="inner">
 												<div class="date">2022-07-01</div>
 												<div class="cont">
@@ -475,7 +432,7 @@
 												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
 											</div>
 										</a>
-										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
 											<div class="inner">
 												<div class="date">2022-07-01</div>
 												<div class="cont">
@@ -485,7 +442,7 @@
 												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
 											</div>
 										</a>
-										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
 											<div class="inner">
 												<div class="date">2022-07-01</div>
 												<div class="cont">
@@ -495,7 +452,7 @@
 												<div class="arrow"><i class="xi-long-arrow-right"></i></div>
 											</div>
 										</a>
-										<a href="javascript:void(0)" class="news-item wow fadeInUp">
+										<a href="../community/notice-view.html" class="news-item wow fadeInUp">
 											<div class="inner">
 												<div class="date">2022-07-01</div>
 												<div class="cont">
@@ -529,7 +486,7 @@
 								<p class="ml-5 d-flex align-items-center"><img src="../assets/images/icon/call-bg.png" alt="아이콘" /> <span class="num"> 1522-1194</span></p>
 							</div>
 						</div>
-						<a href="" class="main-detail mt-15" onclick="javascript:alert('서비스 준비중입니다'); return false">자세히 보기 <i class="xi-angle-right"></i></a>
+						<a href="../inquiry/inquiry.html" class="main-detail mt-15">자세히 보기 <i class="xi-angle-right"></i></a>
 					</div>
 				</section>
 				<!-- E : section -->
@@ -640,10 +597,10 @@
 				fadeEffect: {
 					crossFade: true,
 				},
-				autoplay: {
-					delay: 5000,
-					disableOnInteraction: false,
-				},
+				// autoplay: {
+				// 	delay: 5000,
+				// 	disableOnInteraction: false,
+				// },
 				autoHeight: true,
 				pagination: {
 					el: '.main-visual .swiper-pagination',
